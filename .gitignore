@@ -5,8 +5,8 @@ adamsapp/arms/__pycache__
 adamsapp/splash/__pycache__
 adamsapp/processed_data
 adamsapp/raw_data
-adamsapp/arms/migrations/
-adamsapp/splash/migrations/
+adamsapp/arms/migrations/__pycache__
+adamsapp/splash/migrations/__pycache__
 *.sqlite3
 *.ipynb
 
