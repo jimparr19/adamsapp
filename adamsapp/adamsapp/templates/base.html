@@ -1,0 +1,69 @@
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bokeh-0.12.1.min.css' %}">
+    <script src="{% static 'js/bokeh-0.12.1.min.js' %}"></script>
+
+
+    {% block styles %}
+    {% endblock styles %}
+
+    {% block headscripts %}
+    {% endblock headscripts %}
+
+
+    <title>AdamsApp</title>
+</head>
+<body>
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li class="nav-header">
+                <a class="nav-link" href="{% url 'index' %}">AdamsApp</a>
+            </li>
+            {% block toolbar %}
+            {% endblock toolbar %}
+        </ul>
+    </div>
+</nav>
+{% endblock navbar %}
+
+
+{% block content %}
+{% endblock content %}
+
+<div id="spin-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div id="form-modal-body" class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p id="spin-message">Please wait ...</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="spin-container" class="col-xs-12 spin-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/global.js' %}"></script>
+<script src="{% static 'js/spin.min.js' %}"></script>
+
+{% block scripts %}
+{% endblock scripts %}
+
+</body>
+</html>

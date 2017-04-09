@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+{% endblock styles %}
+
+
+
+{% block content %}
+    <div class="container">
+        <h1>Add Session Data</h1>
+        <div class="row">
+            <div class="col-xs-6">
+                <h3><a href="#add-left" data-toggle="modal" data-tooltip="tooltip" title="Add more data"><span
+                        class="glyphicon glyphicon-plus"></span></a> Left </h3>
+                {% if session.left_hand_file.count != 0 %}
+                    <ul>
+                        {% for file in session.left_hand_file.all %}
+                            <li>
+                                <a class="data-link">{{ file }}</a>
+                                <a href="{% url 'remove_datafile' session.id file.id %}" data-toggle="tooltip"
+                                   title="Remove data file">
+                                    <span class="glyphicon glyphicon-remove icon-red"></span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>None</p>
+                {% endif %}
+            </div>
+            <div class="col-xs-6">
+                <h3><a href="#add-right" data-toggle="modal" data-tooltip="tooltip" title="Add more data"><span
+                        class="glyphicon glyphicon-plus"></span></a> Right </h3>
+                {% if session.right_hand_file.count != 0 %}
+                    <ul>
+                        {% for file in session.right_hand_file.all %}
+                            <li>
+                                <a class="data-link">{{ file }}</a>
+                                <a href="{% url 'remove_datafile' session.id file.id %}" data-toggle="tooltip"
+                                   title="Remove data file">
+                                    <span class="glyphicon glyphicon-remove icon-red"></span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>None</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h3><a href="#add-notes" data-toggle="modal" data-tooltip="tooltip" title="Add notes"><span
+                        class="glyphicon glyphicon-plus"></span></a> Notes </h3>
+                {% if session.notes %}
+                    <p>{{ session.notes }}</p>
+                {% else %}
+                    <p>None</p>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h1><a href="{% url 'save_session' session.id %}" data-toggle="modal" data-tooltip="tooltip"><span
+                        class="glyphicon glyphicon-floppy-save"></span></a></h1>
+            </div>
+            <div class="col-xs-6">
+                <h1><a href="{% url 'remove_session' session.id %}" data-toggle="modal" data-tooltip="tooltip"><span
+                        class="glyphicon glyphicon-trash"></span></a></h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="add-left">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add data files to left</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="id-form-data-left" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id-datafile-left" class="control-label col-md-2">Data File Left</label>
+                            <div class="controls col-md-6">
+                                <input id=id-datafile-left" type="file" class="clearablefileinput"
+                                       name="datafile-left">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary data-left-submit data-link" type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add-right">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add data files to right</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="id-form-data-right" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id-datafile-right" class="control-label col-md-2">Data File Right</label>
+                            <div class="controls col-md-6">
+                                <input id=id-datafile-right" type="file" class="clearablefileinput"
+                                       name="datafile-right">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary data-right-submit data-link" type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add-notes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add notes</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="id-form-data-notes" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id-datafile-notes" class="control-label col-md-2">Data Notes</label>
+                            <div class="controls col-md-6">
+                                <input id=id-datafile-notes" type="test" size="50" value="{{ session.notes }}"
+                                       name="datafile-notes">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary data-notes-submit" type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+
+{% block scripts %}
+    <script type="text/javascript">
+        function ajaxUpload(form) {
+            var target = document.getElementById('spin-container');
+            $('#spin-modal').modal('toggle');
+            var spinner = new Spinner(opts).spin(target);
+            var formData = new FormData(form);
+
+            $.ajax({
+                type: form.method,
+                url: form.action,
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    spinner.stop();
+                    $('#spin-message').html('<p>' + data.message + '</p>');
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                },
+                error: function (data) {
+                    spinner.stop();
+                    $('#spin-message').html('<p>Internal error.</p>');
+                    setTimeout(function () {
+                        $('#spin-modal').modal('toggle');
+                    }, 1000);
+                },
+            });
+        }
+        $('[data-tooltip="tooltip"]').tooltip();
+        $('.data-left-submit').click(function (event) {
+            $('#add-data-left').modal('hide');
+            event.preventDefault();
+            ajaxUpload($('#id-form-data-left')[0]);
+        });
+        $('.data-right-submit').click(function (event) {
+            $('#add-data-right').modal('hide');
+            event.preventDefault();
+            ajaxUpload($('#id-form-data-right')[0]);
+        });
+        $('.data-notes-submit').click(function (event) {
+            $('#add-notes').modal('hide');
+            event.preventDefault();
+            ajaxUpload($('#id-form-data-notes')[0]);
+        });
+        $('.data-link').click(function (event) {
+            //event.preventDefault();
+            var target = document.getElementById('spin-container');
+            $('#spin-message').html('<p>Preparing the data. Please wait ...</p>');
+            //$('#spin-modal').modal('toggle');
+            //var spinner = new Spinner(opts).spin(target);
+
+        });
+
+    </script>
+{% endblock scripts %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block toolbar %}
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'arms_index' %}">Sessions</a>
+    </li>
+{% endblock toolbar %}
+
+{% block content %}
+<div class="container">
+    <h3>Dashboard</h3>
+    <p>Viewing the data file: </p>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="wait-message">Loading the chart. Please wait ...</p>
+            <div class="col-xs-9">
+                {{ div|safe }} {{ script|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

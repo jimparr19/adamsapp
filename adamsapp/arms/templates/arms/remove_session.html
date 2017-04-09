@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <h1>Remove Session</h1>
+        {{ dev }}
+        <div class="row">
+            <div class="col-md-10">
+                <p>This will remove the session {{ session }}.</p>
+                <p>It will also remove the following data files from the tool:</p>
+                <ul>
+                    {% if left_hand_files %}
+                    {% for file in left_hand_files %}
+                        <li>{{ file }}</li>
+                    {% endfor %}
+                    {% endif %}
+                    {% if right_hand_files %}
+                    {% for file in right_hand_files %}
+                        <li>{{ file }}</li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                <p>Are you sure?</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {% crispy form %}
+            </div>
+        </div>
+    </div> <!-- container -->
+
+{% endblock content %}
+
+
+{% block scripts %}
+{% endblock scripts %}

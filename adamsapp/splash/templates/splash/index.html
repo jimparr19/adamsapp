@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+{% endblock styles %}
+
+{% block navbar %}
+    <div class="empty"></div>
+{% endblock navbar %}
+
+{% block content %}
+
+<div class="splash-image"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row tool-heading"><h2>AdamsApp</h2></div>
+            <div class="row tool-launch"><a href="{% url 'arms_index' %}" class="btn btn-primary"> Launch </a></div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

@@ -1,0 +1,12 @@
+venv
+.idea
+adamsapp/adamsapp/__pycache__
+adamsapp/arms/__pycache__
+adamsapp/splash/__pycache__
+adamsapp/processed_data
+adamsapp/raw_data
+adamsapp/arms/migrations/
+adamsapp/splash/migrations/
+*.sqlite3
+*.ipynb
+
